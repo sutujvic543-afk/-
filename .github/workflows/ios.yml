@@ -1,0 +1,24 @@
+name: Build iOS IPA
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ipa:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and validate arm64 iOS package
+        run: bash scripts/build-ios.sh
+      - name: Upload IPA for signing
+        uses: actions/upload-artifact@v4
+        with:
+          name: Lintalk-iOS-unsigned
+          path: |
+            build/Lintalk-0.3.1-unsigned.ipa
+            build/SHA256.txt
+          if-no-files-found: error
+          retention-days: 14
