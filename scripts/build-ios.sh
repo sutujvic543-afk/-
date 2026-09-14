@@ -24,7 +24,7 @@ with open('build/Payload/Lintalk.app/Info.plist','wb') as f: plistlib.dump(p,f)
 PY
 plutil -lint "$APP/Info.plist"
 file "$APP/Lintalk"
-lipo -verify_arch arm64 "$APP/Lintalk"
+lipo "$APP/Lintalk" -verify_arch arm64
 # This is intentionally not distribution-signed. The signing provider must
 # add its provisioning profile, entitlements, and valid distribution signature.
 codesign --remove-signature "$APP/Lintalk" 2>/dev/null || true
