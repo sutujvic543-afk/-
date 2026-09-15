@@ -18,7 +18,8 @@ jobs:
         with:
           name: Lintalk-iOS-unsigned
           path: |
-            build/Lintalk-0.3.1-unsigned.ipa
+            build/*.ipa
             build/SHA256.txt
           if-no-files-found: error
           retention-days: 14
+
